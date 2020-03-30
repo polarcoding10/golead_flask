@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup 3</title>
+    <link href="https://fonts.googleapis.com/css?family=Archivo:400,500,600,700%7CPoppins:400,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendors/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme/default.css') }}">
+    <script src="{{ url_for('static', filename='assets/vendors/jquery/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendors/bootstrap/bootstrap.bundle.min.js') }}"></script>
+</head>
+<body>
+<div class="ca-auth-wrapper bg-white">
+    <div class="ca-auth-side-form bg-white">
+        <div class="ca-auth-content">
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div class="text-center">
+                        <img class="img-fluid mb-4" src="./assets/images/logo.svg" alt="">
+                        <h1>Sign up</h1>
+                    </div>
+                    <form class="my-5" action="/register" method="POST" id="first123" name="first">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="name1" class="form-control" placeholder="john doe" autofocus required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" id="email" class="form-control" placeholder="john.doe@email.com" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input id="password" type="password" class="form-control" placeholder="*******" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="rememberChxbox">
+                                <label class="custom-control-label" for="rememberChxbox">I agree to our privacy policy and terms of service.</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="test1" class="btn btn-primary btn-block mb-4" onclick="">Sign Up</button>
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <p class="mt-4">Already have an account? <a href="/login">Log in</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $('#test1').bind('click', function(e) {
+        e.preventDefault();
+        var dat = {
+            name: $('#name1').val(),
+            email: $('#email').val(),
+            password: $('#password').val()
+        }
+        var dat = JSON.stringify(dat);
+
+        $.ajax({
+            type: "POST",
+            url: "/register",
+            data: dat,
+            success: function(){
+                console.log('YEAH');
+            },
+            dataType: "json",
+            contentType : "application/json"
+        }).done(function(data){
+            alert(data);
+        });
+
+    });
+</script>
+
+</body>
+
+</html>
